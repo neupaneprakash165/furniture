@@ -1,5 +1,5 @@
 import React from "react";
-// import { IoCartOutline } from "react-icons/io5";
+import { IoCartOutline } from "react-icons/io5";
 import { Link } from 'react-router-dom';
 
 export const Navbar = () => {
@@ -21,8 +21,8 @@ return(
       <li><Link to="/">HOME</Link></li>
         <li><Link to="/shop">SHOP</Link></li>
         <li><Link to="/contact">CONTACT US</Link></li>
-        {/* <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> LOGIN</a></li> */}
-        {/* <li><a href="#"><span class="glyphicon glyphicon-cart"></span> <IoCartOutline />CART</a></li> */}
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> LOGIN</a></li> 
+         <li><a href="#"><span class="glyphicon glyphicon-cart"></span> <IoCartOutline />CART</a></li>
       </ul>
     </div>
   </div>
