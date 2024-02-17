@@ -1,22 +1,16 @@
 const Hero = () =>{
     return( 
-      <div className="container-fluid">
+      <div className="container1">
       <img src="/images/retro.jpg" alt="Background" className="background-img" />
         <div class="jumbotron text-center">
   <h1>Triveni</h1> 
   <p>  We specialize in all Kinds of Furniture</p> 
-  <form>
-    <div class="input-group">
-      <input type="Search"class="form-control" style={{ width: '250px' }}  placeholder="Search" required></input>
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-danger">Submit</button>
-      </div>
-    </div>
-  </form>
+  <form class="d-flex ms-auto me-auto  w-50">
+                <input class="form-control" id="searchbox" type="search" placeholder="Search" aria-label="Search"/>
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
 </div>
-</div>
-
-   
+</div>  
 )
 };
 export default Hero; 

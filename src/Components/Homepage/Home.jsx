@@ -11,5 +11,5 @@ return(
     <Aboutus/> 
 </div>
 );
-};
+}
 export default Home; 

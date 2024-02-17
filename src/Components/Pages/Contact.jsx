@@ -1,82 +1,108 @@
-import React from "react"; 
-// import { Container, Row, Col } from "react-bootstrap";
-// import { contactConfig } from "../content_option"
-// hehe
-export default function ContactUs() {
-  
+import React, { useState } from 'react';
+
+const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  const [message, setMessage] = useState('');
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Check if any field is empty
+    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+      setMessage('Please fill out all fields.');
+      return;
+    }
+    // Implement form submission logic here
+    console.log(formData);
+    // Reset form after submission
+    setFormData({
+      name: '',
+      email: '',
+      subject: '',
+      message: ''
+    });
+    setMessage('Thank you for your submission!');
+  };
 
   return (
-      <Container>
-     
-        <Row className="mb-5 mt-3">
-          <Col lg="8">
-            <h1 className="display-4 mb-4">Contact Me</h1>
-            <hr className="t_border my-4 ml-0 text-left" />
-          </Col>
-        </Row>
-        <Row className="sec_sp">
-          <Col lg="5" className="mb-5">
-            <h3 className="color_sec py-4">Get in touch</h3>
-            <address>
-              <strong>Email:</strong>{" "}
-              <a href={`mailto:${contactConfig.YOUR_EMAIL}`}>
-                {contactConfig.YOUR_EMAIL}
-              </a>
-              <br />
-              <br />
-              {contactConfig.hasOwnProperty("YOUR_FONE") ? (
-                <p>
-                  <strong>Phone:</strong> {contactConfig.YOUR_FONE}
-                </p>
-              ) : (
-                ""
-              )}
-            </address>
-            <p>{contactConfig.description}</p>
-          </Col>
-          <Col lg="7" className="d-flex align-items-center">
-            <form  className="contact__form w-100">
-              <Row>
-                <Col lg="6" className="form-group">
+    <section className="contact-section py-5" style={{backgroundColor: '#f0f8ff'}}>
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-lg-6">
+            <div className="card p-4">
+              <h2 className="section-heading text-center mb-4">Contact Us</h2>
+              {message && <div className="alert alert-success">{message}</div>}
+              <form onSubmit={handleSubmit}>
+                <div className="mb-3">
                   <input
-                    className="form-control"
+                    type="text"
                     id="name"
                     name="name"
-                    placeholder="Name" 
-                    type="text"
-                    required 
+                    className="form-control"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Your Name"
+                    required
                   />
-                </Col>
-                <Col lg="6" className="form-group">
+                </div>
+                <div className="mb-3">
                   <input
-                    className="form-control rounded-0"
+                    type="email"
                     id="email"
                     name="email"
-                    placeholder="Email"
-                    type="email" 
-                    required 
+                    className="form-control"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="Your Email"
+                    required
                   />
-                </Col>
-              </Row>
-              <textarea
-                className="form-control rounded-0"
-                id="message"
-                name="message"
-                placeholder="Message"
-                rows="5" 
-                required
-              ></textarea>
-              <br />
-              <Row>
-                <Col lg="12" className="form-group">
-                  <button className="btn ac_btn" type="submit"> 
-                  Send
-                  </button>
-                </Col>
-              </Row>
-            </form>
-          </Col>
-        </Row>
-      </Container>
+                </div>
+                <div className="mb-3">
+                  <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    className="form-control"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    placeholder="Subject"
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows="4"
+                    className="form-control"
+                    value={formData.message}
+                    onChange={handleChange}
+                    placeholder="Your Message"
+                    required
+                  ></textarea>
+                </div>
+                <div className="text-center">
+                  <button type="submit" className="btn btn-primary">Send Message</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
-}
+};
+
+export default Contact;

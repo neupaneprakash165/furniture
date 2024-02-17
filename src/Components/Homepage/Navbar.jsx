@@ -1,33 +1,45 @@
-import React from "react";
-import { IoCartOutline } from "react-icons/io5";
-import { Link } from 'react-router-dom';
 
-export const Navbar = () => {
-return(
-  <nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-     
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-    <img src="/images/triveni.png" alt="Logo" class="logo-img"> 
-      </img>
-      <ul class="nav navbar-nav navbar-right">
-      <li><Link to="/">HOME</Link></li>
-        <li><Link to="/shop">SHOP</Link></li>
-        <li><Link to="/contact">CONTACT US</Link></li>
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> LOGIN</a></li> 
-         <li><a href="#"><span class="glyphicon glyphicon-cart"></span> <IoCartOutline />CART</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
 
-)
-};
-    export default Navbar;
+    import React from "react";
+    import { IoCartOutline } from "react-icons/io5";
+    import { FaHome, FaShoppingCart, FaPhoneAlt, FaUser } from "react-icons/fa";
+    import { Link } from 'react-router-dom';
+    import logo from '../../assets/triveni.png';
+    
+    export const Navbar = () => {
+      return (
+        <nav className="navbar navbar-expand-md navbar-dark bg-dark"style={{ height: '70px' }}>
+        <div className="container-fluid">
+          <Link className="navbar-brand me-auto" to="/">
+            <img src={logo} alt="Triveni Logo" className="rounded-pill" width={150} height={100} />
+          </Link>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="mynavbar">
+            <ul className="navbar-nav ms-auto mb-2 mb-md-0">
+              <li className="nav-item">
+                <Link className="nav-link" to="/"><FaHome/>HOME</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/shop"><FaShoppingCart/>SHOP</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/contact"><FaPhoneAlt/>CONTACT US</Link>
+              </li>
+              <li className="nav-item">
+              <Link className="nav-link" to="/login"><FaUser /> LOGIN</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/cart"><IoCartOutline /> CART</Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      );
+    };
+export default Navbar;
+    
+
+    
