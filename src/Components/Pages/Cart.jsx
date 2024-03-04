@@ -57,7 +57,8 @@ const Cart = ({ cartItems, increaseQuantity, decreaseQuantity, removeItem }) => 
             <div key={item.id} className="card mb-3">
               <div className="row g-0">
                 <div className="col-md-3">
-                  <img src={item.image} className="img-fluid rounded-start" alt={item.name} style={{ maxHeight: '100px' }} />
+                 
+                  <img src={`http://127.0.0.1:8000/${item.file_path}`} className="img-fluid rounded-start" alt={item.name} style={{ maxHeight: '100px' }} />
                 </div>
                 <div className="col-md-9">
                   <div className="card-body">

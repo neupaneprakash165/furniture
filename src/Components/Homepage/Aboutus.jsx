@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
 const Aboutus = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -34,7 +35,8 @@ const Aboutus = () => {
 
             In essence, Triveni Furniture Udhyog isn't just a furniture store; it's a destination where quality meets craftsmanship, and where the vision of creating timeless pieces intersects with the ethos of sustainability. As a trusted name in the community, it continues to redefine the standards of excellence in the furniture industry, making it the preferred choice for discerning customers seeking both style and substance. </h4>
           <br />
-          <button className="btn btn-default btn-lg">Get in Touch</button>
+          {/* Use Link component to navigate to the contact page */}
+          <Link to="/contact" className="btn btn-default btn-lg">Get in Touch</Link>
         </div>
         <div className="col-sm-4 d-flex align-items-center">
           <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">

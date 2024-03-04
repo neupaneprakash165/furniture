@@ -1,16 +1,20 @@
-const Hero = () =>{
-    return( 
-      <div className="container1">
-      <img src="/images/retro.jpg" alt="Background" className="background-img" />
-        <div class="jumbotron text-center">
-  <h1>Triveni</h1> 
-  <p>  We specialize in all Kinds of Furniture</p> 
-  <form class="d-flex ms-auto me-auto  w-50">
-                <input class="form-control" id="searchbox" type="search" placeholder="Search" aria-label="Search"/>
-                <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
-</div>
-</div>  
-)
+import React from 'react';
+
+const Hero = () => {
+  return (
+    <div className="container-fluid p-0 position-relative">
+      <img src="/images/retro.jpg" alt="Background" className="background-img position-absolute top-0 start-0 w-100" />
+      <div className="navbar navbar-expand-md  bg-transparent py-3">
+        <div className="container">
+          {/* Navbar content */}
+        </div>
+      </div>
+      <div className="jumbotron text-center hero-content">
+        <h1 className="display-4">Triveni</h1>
+        <p className="lead">We specialize in all kinds of furniture</p>
+      </div>
+    </div>
+  );
 };
-export default Hero; 
+
+export default Hero;

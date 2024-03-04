@@ -1,42 +1,79 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import { FaFacebook, FaGoogle, FaGithub } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 
-function LOGIN() {
+function LOGIN({ setUser }) {
   const [isLogin, setIsLogin] = useState(true);
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isValid, setIsValid] = useState(true);
   const [isSuccess, setIsSuccess] = useState(false);
+  const navigate = useNavigate(); // Initialize navigate function
 
   const handleSwitchForm = () => {
     setIsLogin(prevState => !prevState);
   };
 
-  const handleLoginSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Validate inputs
-    if (username && password) {
-      // Implement login logic
-      console.log('Logging in...');
-      setIsSuccess(true); // Set success state to true
-    } else {
-      setIsValid(false);
-    }
-  };
+    if (isLogin) {
+      // Login
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password }),
+        });
 
-  const handleRegisterSubmit = (e) => {
-    e.preventDefault();
-    // Validate inputs
-    if (name && username && email && password && confirmPassword && password === confirmPassword) {
-      // Implement registration logic
-      console.log('Registering...');
-      setIsSuccess(true); // Set success state to true
+        if (response.ok) {
+          const data = await response.json();
+          console.log('Login successful:', data);
+          setUser(data); // Set user information in state
+          setIsSuccess(true);
+          navigate('/shop'); // Navigate to shop page after successful login
+        } else {
+          console.error('Login failed:', response.statusText);
+          setIsValid(false);
+          setIsSuccess(false);
+        }
+      } catch (error) {
+        console.error('Login error:', error);
+        setIsValid(false);
+        setIsSuccess(false);
+      }
     } else {
-      setIsValid(false);
+      // Register
+      if (name && email && password && password === confirmPassword) {
+        try {
+          const response = await fetch('http://127.0.0.1:8000/api/register', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name, email, password }),
+          });
+
+          if (response.ok) {
+            console.log('Registration successful');
+            setIsSuccess(true);
+          } else {
+            console.error('Registration failed:', response.statusText);
+            setIsValid(false);
+            setIsSuccess(false);
+          }
+        } catch (error) {
+          console.error('Error registering:', error);
+          setIsValid(false);
+          setIsSuccess(false);
+        }
+      } else {
+        setIsValid(false);
+      }
     }
   };
 
@@ -60,27 +97,21 @@ function LOGIN() {
       </Row>
       <Row className="justify-content-center align-items-center">
         <Col md="6">
-          <Form onSubmit={isLogin ? handleLoginSubmit : handleRegisterSubmit} className="p-4 border rounded bg-white">
+          <Form onSubmit={handleSubmit} className="p-4 border rounded bg-white">
             <h2 className="mb-4 text-center">{isLogin ? 'Sign In' : 'Register'}</h2>
-            {isValid ? null : <Alert variant="danger" className="mb-3">Please fill in all fields</Alert>}
-            {isSuccess && <Alert variant="success" className="mb-3">{isLogin ? 'Login successful!' : 'Registration successful!'}</Alert>}
+            {!isValid && <Alert variant="danger" className="mb-3">Please fill in all fields correctly</Alert>}
+            
             {!isLogin && (
               <Form.Group className="mb-3" controlId="register-name">
                 <Form.Label>Name</Form.Label>
                 <Form.Control type="text" placeholder="Enter name" value={name} onChange={(e) => setName(e.target.value)} />
               </Form.Group>
             )}
-            <Form.Group className="mb-3" controlId={isLogin ? 'login-username' : 'register-username'}>
-              <Form.Label>{isLogin ? 'Username' : 'Username (optional)'}</Form.Label>
-              <Form.Control type="text" placeholder="Enter username" value={username} onChange={(e) => setUsername(e.target.value)} />
+            <Form.Group className="mb-3" controlId="login-email">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)} />
             </Form.Group>
-            {!isLogin && (
-              <Form.Group className="mb-3" controlId="register-email">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)} />
-              </Form.Group>
-            )}
-            <Form.Group className="mb-3" controlId={isLogin ? 'login-password' : 'register-password'}>
+            <Form.Group className="mb-3" controlId="login-password">
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </Form.Group>
@@ -88,11 +119,6 @@ function LOGIN() {
               <Form.Group className="mb-3" controlId="register-confirm-password">
                 <Form.Label>Confirm Password</Form.Label>
                 <Form.Control type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
-              </Form.Group>
-            )}
-            {!isLogin && (
-              <Form.Group className="mb-3">
-                <Form.Check type="checkbox" label="I have read and agree to the terms and conditions" />
               </Form.Group>
             )}
             <Button variant="primary" type="submit" className="mb-3 w-100">{isLogin ? 'Login' : 'Register'}</Button>
