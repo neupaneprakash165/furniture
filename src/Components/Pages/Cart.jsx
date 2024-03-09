@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Navbar from '../Homepage/Navbar';
+import Footer from '../Homepage/Footer';
 
 const Cart = ({ cartItems, increaseQuantity, decreaseQuantity, removeItem }) => {
   const [showCheckoutForm, setShowCheckoutForm] = useState(false);
@@ -47,6 +49,8 @@ const Cart = ({ cartItems, increaseQuantity, decreaseQuantity, removeItem }) => 
   };
 
   return (
+    <>
+    <Navbar/>
     <div className="container">
       <h2 className="mt-4 mb-3">Cart</h2>
       {cartItems.length === 0 ? (
@@ -131,6 +135,8 @@ const Cart = ({ cartItems, increaseQuantity, decreaseQuantity, removeItem }) => 
         </div>
       )}
     </div>
+    <Footer/>
+    </>
   );
 };
 

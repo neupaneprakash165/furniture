@@ -4,11 +4,16 @@ import React from 'react';
 // import Herosection from './Hero';
 import Aboutus from './Aboutus';
 import Hero from './Hero';
+import Navbar from './Navbar';
+import Footer from './Footer';
+
 const Home = () => {
 return( 
 <div>
+    <Navbar/>
     <Hero/> 
     <Aboutus/> 
+    <Footer/>
 </div>
 );
 }

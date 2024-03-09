@@ -1,6 +1,9 @@
 
 
 import React, { useState } from 'react';
+import AdminNav from './AdminNav';
+
+
 
 const AddProduct = () => {
   const [name, setName] = useState('');
@@ -38,8 +41,10 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="container mt-5">
-      <h2 className="mb-4">Add Product</h2>
+    <>
+    <AdminNav/>
+    <div className="container">
+      <h2 className='mt-10 pt-10'>Add Product</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="name" className="form-label">Name:</label>
@@ -87,6 +92,7 @@ const AddProduct = () => {
         <button type="submit" className="btn btn-primary">Add Product</button>
       </form>
     </div>
+    </>
   );
 };
 

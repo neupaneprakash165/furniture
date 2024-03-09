@@ -18,7 +18,7 @@ const Login = () => {
       if (!response.ok) {
         throw new Error('Login failed');
       }
-
+        console.log (response);
       // Login successful, you may handle the response here
       console.log('Login successful');
     } catch (error) {

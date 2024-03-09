@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Navbar from '../src/Components/Homepage/Navbar';
-import Footer from '../src/Components/Homepage/Footer';
+// import Footer from '../src/Components/Homepage/Footer';
 import Shop from './Components/Pages/Shop';
 import Home from './Components/Homepage/Home';
 import Contact from './Components/Pages/Contact';
 import Cart from './Components/Pages/Cart';
 import LOGIN from './Components/Pages/Login';
 import AddProduct from './Components/Admin/AddProduct';
+import ProductList from './Components/Admin/ProductList';
 
 const App = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -40,9 +41,12 @@ const App = () => {
   return (
     <div>
       <Router>
-        {/* Pass setUser function to the LOGIN component to update user state */}
-        {window.location.pathname !== '/AddProduct' && <Navbar user={user} logout={logout} />}
+      
+
+         {/* <Navbar user={user} logout={logout} />  */}
         <Routes>
+        {/* <Navbar/>  */}
+
           <Route path='/shop' element={<Shop addToCart={addToCart} />} />
           <Route path='/contact' element={<Contact />} />
           {/* Pass setUser function to the LOGIN component to update user state */}
@@ -51,9 +55,8 @@ const App = () => {
           <Route path='/cart' element={<Cart user={user} cartItems={cartItems} increaseQuantity={increaseQuantity} decreaseQuantity={decreaseQuantity} removeItem={removeItem} />} />
           <Route path='/' element={<Home />} />
           <Route path='/addproduct' element={<AddProduct />} />
+          <Route path='/productlist' element={<ProductList />} />
         </Routes>
-        {/* {window.location.pathname !== '/AddProduct' && <Footer />} */}
-        <Footer/>
       </Router>
     </div>
   );

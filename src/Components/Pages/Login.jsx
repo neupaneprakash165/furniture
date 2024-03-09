@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import { FaFacebook, FaGoogle, FaGithub } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
+import Navbar from '../Homepage/Navbar';
+import Footer from '../Homepage/Footer';
 
 function LOGIN({ setUser }) {
   const [isLogin, setIsLogin] = useState(true);
@@ -35,7 +37,8 @@ function LOGIN({ setUser }) {
           console.log('Login successful:', data);
           setUser(data); // Set user information in state
           setIsSuccess(true);
-          navigate('/shop'); // Navigate to shop page after successful login
+          if (data['email']==='admin@gmail.com') navigate('/addproduct');
+          else  navigate('/shop'); // Navigate to shop page after successful login
         } else {
           console.error('Login failed:', response.statusText);
           setIsValid(false);
@@ -78,57 +81,63 @@ function LOGIN({ setUser }) {
   };
 
   return (
-    <Container className="p-5 my-5 bg-light rounded">
-      <Row className="justify-content-center mb-4">
-        <Col md="6">
-          <div className="text-center">
-            <Button onClick={handleSwitchForm} className="me-3" variant={isLogin ? "primary" : "outline-primary"}>{isLogin ? "Login" : "Register"}</Button>
-            <Button onClick={handleSwitchForm} variant={!isLogin ? "primary" : "outline-primary"}>{isLogin ? "Register" : "Login"}</Button>
-          </div>
-        </Col>
-      </Row>
-      <Row className="justify-content-center align-items-center mb-4">
-        <Col md="6" className="text-center">
-          <div className="mb-3">Sign in with:</div>
-          <FaFacebook className="me-3" size={24} />
-          <FaGoogle className="me-3" size={24} />
-          <FaGithub size={24} />
-        </Col>
-      </Row>
-      <Row className="justify-content-center align-items-center">
-        <Col md="6">
-          <Form onSubmit={handleSubmit} className="p-4 border rounded bg-white">
-            <h2 className="mb-4 text-center">{isLogin ? 'Sign In' : 'Register'}</h2>
-            {!isValid && <Alert variant="danger" className="mb-3">Please fill in all fields correctly</Alert>}
-            
-            {!isLogin && (
-              <Form.Group className="mb-3" controlId="register-name">
-                <Form.Label>Name</Form.Label>
-                <Form.Control type="text" placeholder="Enter name" value={name} onChange={(e) => setName(e.target.value)} />
+    <>
+    <Navbar/>
+    <div className="full-background" style={{ background: 'linear-gradient(135deg, #2E3192, #1BFFFF)', paddingTop: '50px', paddingBottom: '50px'  }}>
+      <Container className="p-5 my-5 ">
+        <Row className="justify-content-center mb-4">
+          <Col md="6">
+            <div className="text-center">
+              <Button onClick={handleSwitchForm} className="me-3" variant={isLogin ? "primary" : "outline-primary"}>{isLogin ? "Login" : "Register"}</Button>
+              <Button onClick={handleSwitchForm} variant={!isLogin ? "primary" : "outline-primary"}>{isLogin ? "Register" : "Login"}</Button>
+            </div>
+          </Col>
+        </Row>
+        <Row className="justify-content-center align-items-center mb-4">
+          <Col md="6" className="text-center">
+            <div className="mb-3">Sign in with:</div>
+            <FaFacebook className="me-3" size={24} />
+            <FaGoogle className="me-3" size={24} />
+            <FaGithub size={24} />
+          </Col>
+        </Row>
+        <Row className="justify-content-center align-items-center">
+          <Col md="6">
+            <Form onSubmit={handleSubmit} className="p-4 border rounded bg-white">
+              <h2 className="mb-4 text-center">{isLogin ? 'Sign In' : 'Register'}</h2>
+              {!isValid && <Alert variant="danger" className="mb-3">Please fill in all fields correctly</Alert>}
+              
+              {!isLogin && (
+                <Form.Group className="mb-3" controlId="register-name">
+                  <Form.Label>Name</Form.Label>
+                  <Form.Control type="text" placeholder="Enter name" value={name} onChange={(e) => setName(e.target.value)} />
+                </Form.Group>
+              )}
+              <Form.Group className="mb-3" controlId="login-email">
+                <Form.Label>Email address</Form.Label>
+                <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)} />
               </Form.Group>
-            )}
-            <Form.Group className="mb-3" controlId="login-email">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)} />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="login-password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-            </Form.Group>
-            {!isLogin && (
-              <Form.Group className="mb-3" controlId="register-confirm-password">
-                <Form.Label>Confirm Password</Form.Label>
-                <Form.Control type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+              <Form.Group className="mb-3" controlId="login-password">
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
               </Form.Group>
-            )}
-            <Button variant="primary" type="submit" className="mb-3 w-100">{isLogin ? 'Login' : 'Register'}</Button>
-            {!isLogin && (
-              <p className="mt-3 text-center">Already have an account? <Button variant="link" onClick={handleSwitchForm}>Login here</Button></p>
-            )}
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+              {!isLogin && (
+                <Form.Group className="mb-3" controlId="register-confirm-password">
+                  <Form.Label>Confirm Password</Form.Label>
+                  <Form.Control type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                </Form.Group>
+              )}
+              <Button variant="primary" type="submit" className="mb-3 w-100">{isLogin ? 'Login' : 'Register'}</Button>
+              {!isLogin && (
+                <p className="mt-3 text-center">Already have an account? <Button variant="link" onClick={handleSwitchForm}>Login here</Button></p>
+              )}
+            </Form>
+          </Col>
+        </Row>
+      </Container>
+    </div>
+    <Footer/>
+    </>
   );
 }
 

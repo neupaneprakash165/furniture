@@ -4,9 +4,9 @@ import { FaHome, FaShoppingCart, FaPhoneAlt, FaUser } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/triveni.png';
 
-const Navbar = ({ user, logout }) => {
+const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-md navbar-dark bg-transparent py-3">
+    <nav className="navbar navbar-expand-md navbar-dark  ">
       <div className="container">
         <Link className="navbar-brand" to="/">
           <img src={logo} alt="Triveni Logo" className="navbar-logo" />
@@ -23,21 +23,14 @@ const Navbar = ({ user, logout }) => {
               <Link className="nav-link" to="/shop"><FaShoppingCart/> SHOP</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/contact"><FaPhoneAlt/> CONTACT US</Link>
+              <Link className="nav-link" to="/contact"><FaPhoneAlt/> CONTACT </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/cart"><IoCartOutline /> CART</Link>
             </li>
-            <li className="nav-item">
-              {user ? (
-                <>
-                  <span className="nav-link">Welcome, {user.Name}</span>
-                  <button className="btn btn-link text-white" onClick={logout}>Logout</button>
-                </>
-              ) : (
+             <li className="nav-item">
                 <Link className="nav-link" to="/login"><FaUser /> LOGIN</Link>
-              )}
-            </li>
+            </li> 
           </ul>
         </div>
       </div>

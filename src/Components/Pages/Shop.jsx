@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaHeart } from 'react-icons/fa';
+import Navbar from '../Homepage/Navbar';
+import Footer from '../Homepage/Footer';
 
 const Shop = ({ addToCart }) => {
   const [products, setProducts] = useState([]);
@@ -48,7 +50,9 @@ const Shop = ({ addToCart }) => {
   const categories = Array.from(new Set(products.map((product) => product.category)));
 
   return (
-    <div className="container">
+    <>
+    <Navbar/>
+    <div className="container-fluid" style={{ background: 'linear-gradient(180deg, #2E3192 0%, #1BFFFF 100%)', paddingTop: '50px', paddingBottom: '50px' }}>
       <h2 className="text-center mb-4">Shop</h2>
       {notification && <div className="alert alert-success" role="alert">{notification}</div>}
       <div className="row justify-content-center">
@@ -110,6 +114,10 @@ const Shop = ({ addToCart }) => {
         ))}
       </div>
     </div>
+    <Footer/>
+
+    </>
+    
   );
 };
 

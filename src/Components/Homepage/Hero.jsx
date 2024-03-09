@@ -2,16 +2,47 @@ import React from 'react';
 
 const Hero = () => {
   return (
-    <div className="container-fluid p-0 position-relative">
-      <img src="/images/retro.jpg" alt="Background" className="background-img position-absolute top-0 start-0 w-100" />
-      <div className="navbar navbar-expand-md  bg-transparent py-3">
-        <div className="container">
-          {/* Navbar content */}
+    <div className="container-fluid ">
+      <div id="demo" className="carousel slide shadow" data-bs-ride="carousel">
+        {/* Indicators/dots */}
+        <div className="carousel-indicators">
+          <button type="button" data-bs-target="#demo" data-bs-slide-to="0" className="active"></button>
+          <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+          <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
         </div>
-      </div>
-      <div className="jumbotron text-center hero-content">
-        <h1 className="display-4">Triveni</h1>
-        <p className="lead">We specialize in all kinds of furniture</p>
+
+        {/* The slideshow/carousel */}
+        <div className="carousel-inner">
+          {/* Make sure your project structure includes the images referenced here */}
+          <div className="carousel-item active">
+            <img src="/images/retro.png" alt="Los Angeles" className="d-block w-100" />
+          </div>
+          <div className="carousel-item">
+            <img src="/images/retro2.jpg" alt="Chicago" className="d-block w-100" />
+          </div>
+          <div className="carousel-item">
+            <img src="/images/retro3.jpg" alt="New York" className="d-block w-100" />
+          </div>
+          <div className="carousel-item">
+            <img src="/images/retro4.jpg" alt="New York" className="d-block w-100" />
+          </div>
+          <div className="carousel-item">
+            <img src="/images/retro5.jpg" alt="New York" className="d-block w-100" />
+          </div>
+          <div className="carousel-item">
+            <img src="/images/retro6.jpg" alt="New York" className="d-block w-100" />
+          </div>
+        </div>
+
+        {/* Left and right controls/icons */}
+        <button className="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span className="visually-hidden">Previous</span>
+        </button>
+        <button className="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+          <span className="carousel-control-next-icon" aria-hidden="true"></span>
+          <span className="visually-hidden">Next</span>
+        </button>
       </div>
     </div>
   );
