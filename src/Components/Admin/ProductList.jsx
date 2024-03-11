@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AdminNav from './AdminNav';
+import { Link } from 'react-router-dom';
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -38,7 +39,7 @@ const ProductList = () => {
 
   return (
     <>
-      <AdminNav/>
+      <AdminNav />
       <div>
         <h2 className="text-center">Product List</h2>
         <div className="row row-cols-1 row-cols-md-3 g-4">
@@ -50,7 +51,8 @@ const ProductList = () => {
                   <h5 className="card-title">{product.name}</h5>
                   <p className="card-text">${product.price}</p>
                   <p className="card-text">{product.description}</p>
-                  <button className="btn btn-danger" onClick={() => handleDelete(product.ID)}>Delete</button>
+                  <button className="btn btn-danger mr-2" onClick={() => handleDelete(product.ID)}>Delete</button>
+                  <Link to={`/Updateproducts/${product.ID}`} className="btn btn-primary">Update</Link>
                 </div>
               </div>
             </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes,} from 'react-router-dom';
 import './App.css';
-import Navbar from '../src/Components/Homepage/Navbar';
+// import Navbar from '../src/Components/Homepage/Navbar';
 // import Footer from '../src/Components/Homepage/Footer';
 import Shop from './Components/Pages/Shop';
 import Home from './Components/Homepage/Home';
@@ -10,6 +10,7 @@ import Cart from './Components/Pages/Cart';
 import LOGIN from './Components/Pages/Login';
 import AddProduct from './Components/Admin/AddProduct';
 import ProductList from './Components/Admin/ProductList';
+import UpdateProduct from './Components/Admin/UpdateProduct';
 
 const App = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -45,8 +46,6 @@ const App = () => {
 
          {/* <Navbar user={user} logout={logout} />  */}
         <Routes>
-        {/* <Navbar/>  */}
-
           <Route path='/shop' element={<Shop addToCart={addToCart} />} />
           <Route path='/contact' element={<Contact />} />
           {/* Pass setUser function to the LOGIN component to update user state */}
@@ -56,6 +55,7 @@ const App = () => {
           <Route path='/' element={<Home />} />
           <Route path='/addproduct' element={<AddProduct />} />
           <Route path='/productlist' element={<ProductList />} />
+          <Route path='/Updateproducts/:id' element={<UpdateProduct/>} />
         </Routes>
       </Router>
     </div>
