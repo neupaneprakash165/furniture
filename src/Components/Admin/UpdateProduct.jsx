@@ -4,6 +4,57 @@ import { useParams } from 'react-router-dom';
 
 function UpdateProduct() {
     const { id } = useParams();
+    const [data, setData] = useState({
+        id:'',
+        name: '',
+        price: '',
+        description: '',
+        file_path: null  // Use null for file input
+      });
+         useEffect(() => {
+              axios
+                   .get("http://127.0.0.1:8000/api/product/" + id)
+                   .then((res) => {
+                        setData({
+                             ...data,
+                             name: res.data.name,
+                             price: res.data.price,
+                             description: res.data.description,
+                             file_path: res.data.file_path,
+        
+                        });
+                   })
+                   .catch((err) => console.log(err));
+         }, []);
+         
+         const navigate = useNavigate();
+    
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        axios
+          .put("http://127.0.0.1:8000/api/product/" + id, data)
+          .then((res) => {
+                 navigate("/");
+          })
+          .catch((err) => console.log(err));
+      };
+
+      const handleInputChange = (e) => {
+        const { name, value, files } = e.target;
+        if (name === 'file_path') {
+            // Handle file input separately
+            setFormData({
+                ...formData,
+                [name]: files[0]  // Only store the first file, you might want to handle multiple files differently
+            });
+        } else {
+            setFormData({
+                ...formData,
+                [name]: value
+            });
+        }
+    };
+      /*
     const [product, setProduct] = useState(null);
     const [formData, setFormData] = useState({
         name: '',
@@ -54,8 +105,7 @@ function UpdateProduct() {
 
     if (!product) {
         return <div>Loading...</div>;
-    }
-
+*/
     return (
         <div>
             <AdminNav />
@@ -77,7 +127,7 @@ function UpdateProduct() {
                     <label>File Path:</label>
                     <input type='file' name="file_path" onChange={handleInputChange} /> <br/><br/>
                 </div>
-                <button>Update Product</button>
+                <button onClick={handleSubmit}>Update Product</button>
             </form>
         </div>
     );

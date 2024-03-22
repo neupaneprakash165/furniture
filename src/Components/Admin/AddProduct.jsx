@@ -2,10 +2,15 @@
 
 import React, { useState } from 'react';
 import AdminNav from './AdminNav';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const AddProduct = () => {
+  const navigate = useNavigate();
+  const navigateDefault = ()=>{
+    navigate("/productlist");
+  }
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
@@ -33,7 +38,9 @@ const AddProduct = () => {
         throw new Error('Failed to add product');
       }
 
-      console.log('Product added successfully');
+      console.warn('Product added successfully');
+      alert('Product added successfully');
+      navigateDefault();
       // Optionally, redirect to another page or show a success message
     } catch (error) {
       console.error('Error adding product:', error.message);

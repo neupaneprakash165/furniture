@@ -10,7 +10,8 @@ import Cart from './Components/Pages/Cart';
 import LOGIN from './Components/Pages/Login';
 import AddProduct from './Components/Admin/AddProduct';
 import ProductList from './Components/Admin/ProductList';
-import UpdateProduct from './Components/Admin/UpdateProduct';
+// import UpdateProduct from './Components/Admin/UpdateProduct';
+import EditProducts from './Components/Admin/EditProducts';
 
 const App = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -55,7 +56,7 @@ const App = () => {
           <Route path='/' element={<Home />} />
           <Route path='/addproduct' element={<AddProduct />} />
           <Route path='/productlist' element={<ProductList />} />
-          <Route path='/Updateproducts/:id' element={<UpdateProduct/>} />
+          <Route path='/Updateproducts/:id' element={<EditProducts/>} />
         </Routes>
       </Router>
     </div>
