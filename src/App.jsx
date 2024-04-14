@@ -12,6 +12,8 @@ import AddProduct from './Components/Admin/AddProduct';
 import ProductList from './Components/Admin/ProductList';
 // import UpdateProduct from './Components/Admin/UpdateProduct';
 import EditProducts from './Components/Admin/EditProducts';
+import ContactList from './Components/Admin/ContactList';
+
 
 const App = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -20,7 +22,7 @@ const App = () => {
   const logout = () => {
     setUser(null);
   };
-  // Define your cart functions here
+  // Define  cart functions here
   const addToCart = (product) => {
     setCartItems([...cartItems, { ...product, quantity: 1 }]);
   };
@@ -57,6 +59,7 @@ const App = () => {
           <Route path='/addproduct' element={<AddProduct />} />
           <Route path='/productlist' element={<ProductList />} />
           <Route path='/Updateproducts/:id' element={<EditProducts/>} />
+          <Route path='/contactlist' element={<ContactList />} />
         </Routes>
       </Router>
     </div>
